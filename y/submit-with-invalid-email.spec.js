@@ -28,5 +28,7 @@ test.describe('Validation Error - Invalid Email Format', () => {
     // Click Register button
     await registrationPage.clickRegister();
 
+    // Verify form is not submitted (email field still has focus or form still visible)
+    await expect(registrationPage.registerButton).toBeVisible();
   });
 });

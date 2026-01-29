@@ -17,7 +17,7 @@ class RegistrationPage {
     this.ageConfirmationCheckbox = this.page.getByRole('checkbox');
     this.registerButton = this.page.getByRole('button', { name: 'Register' });
     this.registerHeading = this.page.getByRole('heading', { name: 'Register' });
-    this.loginLink = this.page.getByText('Login here');
+    this.loginLink = this.page.locator('a:has-text("Login here")');
 
     // Error messages
     this.firstNameError = this.page.getByText('*First Name is required');
@@ -215,7 +215,7 @@ class RegistrationPage {
    * Click on Login link
    */
   async clickLoginLink() {
-    await this.loginLink.click();
+    await this.loginLink.click({ force: true });
   }
 }
 

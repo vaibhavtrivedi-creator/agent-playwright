@@ -51,10 +51,11 @@ test.describe('Form Field Interactions', () => {
     // Verify login link is visible
     await expect(registrationPage.loginLink).toBeVisible();
 
-    // Click on login link and wait for navigation
-    const navigationPromise = page.waitForNavigation({ waitUntil: 'domcontentloaded' }).catch(() => { });
-    await registrationPage.clickLoginLink();
-    await navigationPromise;
+    // Click on login link with force option to bypass banner overlay
+    await page.locator('a:has-text("Login here")').click({ force: true });
+
+    // Wait for URL to change
+    await page.waitForURL(/.*\/auth\/login/, { timeout: 10000 }).catch(() => { });
 
     // Verify URL changes to login page
     await expect(page).toHaveURL(/.*\/auth\/login/);
